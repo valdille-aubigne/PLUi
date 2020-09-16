@@ -16,8 +16,6 @@ TABLESPACE pg_default;
 ALTER TABLE plui.doc_urba_com
     OWNER to postgres;
 
-GRANT SELECT ON TABLE plui.doc_urba_com TO g_valdilleaubigne;
-
 GRANT ALL ON TABLE plui.doc_urba_com TO postgres;
 -- Index: doc_urba_com_the_geom_1553528316973
 
