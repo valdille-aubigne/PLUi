@@ -63,12 +63,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW ;
-
-EXECUTE 'GRANT ALL ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''zone_urba_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''zone_urba_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -125,12 +119,6 @@ EXECUTE 'ALTER TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.dat
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
-USING NEW;
-
-EXECUTE 'GRANT SELECT ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -191,12 +179,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''prescription_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''prescription_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -255,12 +237,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -308,12 +284,6 @@ EXECUTE 'ALTER TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'d
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
-USING NEW;
-
-EXECUTE 'GRANT SELECT ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -365,12 +335,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -420,12 +384,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -470,12 +428,6 @@ EXECUTE 'ALTER TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'dd
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
-USING NEW;
-
-EXECUTE 'GRANT SELECT ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -524,12 +476,6 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
-EXECUTE 'GRANT SELECT ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
-USING NEW;
-
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -574,12 +520,6 @@ EXECUTE 'ALTER TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddm
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
-USING NEW;
-
-EXECUTE 'GRANT SELECT ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
-USING NEW;
-
-EXECUTE 'GRANT ALL ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
