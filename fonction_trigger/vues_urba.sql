@@ -8,7 +8,6 @@ CREATE FUNCTION plui.vues_urba()
     COST 100
     VOLATILE NOT LEAKPROOF
 AS $BODY$
-
 BEGIN
 
 IF TG_OP='INSERT' THEN
@@ -61,6 +60,12 @@ EXECUTE 'ALTER TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'d
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
+USING NEW;
+
+EXECUTE 'GRANT SELECT ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW ;
+
+EXECUTE 'GRANT ALL ON TABLE plui.zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -121,6 +126,12 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
+EXECUTE 'GRANT SELECT ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
+USING NEW;
+
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''prescription_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''prescription_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -177,6 +188,12 @@ EXECUTE 'ALTER TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.data
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
+USING NEW;
+
+EXECUTE 'GRANT SELECT ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -237,6 +254,12 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
+EXECUTE 'GRANT SELECT ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
+USING NEW;
+
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -284,6 +307,12 @@ EXECUTE 'ALTER TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'d
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
+USING NEW;
+
+EXECUTE 'GRANT SELECT ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -335,6 +364,12 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
+EXECUTE 'GRANT SELECT ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
+USING NEW;
+
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -384,6 +419,12 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
+EXECUTE 'GRANT SELECT ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
+USING NEW;
+
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -428,6 +469,12 @@ EXECUTE 'ALTER TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'dd
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
+USING NEW;
+
+EXECUTE 'GRANT SELECT ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -476,6 +523,12 @@ USING NEW;
 EXECUTE 'GRANT ALL ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
 USING NEW;
 
+EXECUTE 'GRANT SELECT ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
+USING NEW;
+
 EXECUTE 
 'INSERT INTO public.layer_styles (f_table_catalog, f_table_schema, f_table_name, f_geometry_column, stylename, styleqml, stylesld, useasdefault, description, owner, ui)
 SELECT f_table_catalog, f_table_schema, ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', f_geometry_column, ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', styleqml, stylesld, useasdefault, description, owner, ui
@@ -520,6 +573,12 @@ EXECUTE 'ALTER TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddm
 USING NEW;
 
 EXECUTE 'GRANT ALL ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO postgres'
+USING NEW;
+
+EXECUTE 'GRANT SELECT ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO g_valdilleaubigne'
+USING NEW;
+
+EXECUTE 'GRANT ALL ON TABLE plui.sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')||' TO vm4ms_admin'
 USING NEW;
 
 EXECUTE 
@@ -754,6 +813,125 @@ EXECUTE
 	AND f_table_name=''sup_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
 	AND stylename=''sup_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
 USING NEW, OLD ;
+
+END IF;
+
+IF TG_OP ='UPDATE' AND NEW.etat ='03' AND OLD.etat<>'03' THEN
+
+/* Copie ajouts vers couches globales */
+
+INSERT INTO plui.zone_urba
+	SELECT libelle, typezone, destdomi, datvalid, idkey_ajout, the_geom 
+	FROM plui.zone_urba_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.zone_urba_libelle
+	SELECT libelle, libelong, datvalid, idkey_ajout, num_page 
+	FROM plui.zone_urba_libelle_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+
+INSERT INTO plui.prescription_surf
+	SELECT libelle, txt, typepsc, stypepsc, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.prescription_surf_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.prescription_lin
+	SELECT libelle, txt, typepsc, stypepsc, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.prescription_lin_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.prescription_pct
+	SELECT libelle, txt, typepsc, stypepsc, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.prescription_pct_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.prescription_pieces_ecrites
+	SELECT typepsc, stypepsc, code_commune, idkey_ajout, piece_ecrite 
+	FROM plui.prescription_pieces_ecrites_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+
+INSERT INTO plui.info_surf
+	SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.info_surf_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.info_lin
+	SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.info_lin_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.info_pct
+	SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout, the_geom 
+	FROM plui.info_pct_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+
+INSERT INTO plui.sup_surf
+	SELECT idkey_ajout, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
+	FROM plui.sup_surf_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.sup_lin
+	SELECT idkey_ajout, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
+	FROM plui.sup_lin_ajouts
+	WHERE idkey_du = NEW.idkey
+	;
+INSERT INTO plui.sup_pct
+	SELECT idkey_ajout, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
+	FROM plui.sup_pct_ajouts
+	WHERE idkey_du = NEW.idkey
+	;	
+
+/* DELETE FROM COUCHES AJOUTS */
+ALTER TABLE plui.zone_urba_ajouts DISABLE TRIGGER zone_urba_ajout;
+DELETE FROM plui.zone_urba_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.zone_urba_ajouts ENABLE TRIGGER zone_urba_ajout;
+
+ALTER TABLE plui.zone_urba_libelle_ajouts DISABLE TRIGGER zone_urba_libelle_ajout;
+DELETE FROM plui.zone_urba_libelle_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.zone_urba_libelle_ajouts ENABLE TRIGGER zone_urba_libelle_ajout;
+
+ALTER TABLE plui.prescription_surf_ajouts DISABLE TRIGGER prescription_surf_ajout;
+DELETE FROM plui.prescription_surf_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.prescription_surf_ajouts ENABLE TRIGGER prescription_surf_ajout;
+
+ALTER TABLE plui.prescription_lin_ajouts DISABLE TRIGGER prescription_lin_ajout;
+DELETE FROM plui.prescription_lin_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.prescription_lin_ajouts ENABLE TRIGGER prescription_lin_ajout;
+
+ALTER TABLE plui.prescription_pct_ajouts DISABLE TRIGGER prescription_pct_ajout;
+DELETE FROM plui.prescription_pct_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.prescription_pct_ajouts ENABLE TRIGGER prescription_pct_ajout;
+
+ALTER TABLE plui.prescription_pieces_ecrites_ajouts DISABLE TRIGGER prescription_pieces_ecrites_ajout;
+DELETE FROM plui.prescription_pieces_ecrites_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.prescription_pieces_ecrites_ajouts ENABLE TRIGGER prescription_pieces_ecrites_ajout;
+
+ALTER TABLE plui.info_surf_ajouts DISABLE TRIGGER info_surf_ajout;
+DELETE FROM plui.info_surf_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.info_surf_ajouts ENABLE TRIGGER info_surf_ajout;
+
+ALTER TABLE plui.info_lin_ajouts DISABLE TRIGGER info_lin_ajout;
+DELETE FROM plui.info_lin_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.info_lin_ajouts ENABLE TRIGGER info_lin_ajout;
+
+ALTER TABLE plui.info_pct_ajouts DISABLE TRIGGER info_pct_ajout;
+DELETE FROM plui.info_pct_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.info_pct_ajouts ENABLE TRIGGER info_pct_ajout;
+
+ALTER TABLE plui.sup_surf_ajouts DISABLE TRIGGER sup_surf_ajout;
+DELETE FROM plui.sup_surf_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.sup_surf_ajouts ENABLE TRIGGER sup_surf_ajout;
+
+ALTER TABLE plui.sup_lin_ajouts DISABLE TRIGGER sup_lin_ajout;
+DELETE FROM plui.sup_lin_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.sup_lin_ajouts ENABLE TRIGGER sup_lin_ajout;
+
+ALTER TABLE plui.sup_pct_ajouts DISABLE TRIGGER sup_pct_ajout;
+DELETE FROM plui.sup_pct_ajouts WHERE idkey_du = NEW.idkey ;
+ALTER TABLE plui.sup_pct_ajouts ENABLE TRIGGER sup_pct_ajout;
 
 END IF;
 
