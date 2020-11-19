@@ -8,7 +8,6 @@ CREATE FUNCTION plui.doc_urba()
     COST 100
     VOLATILE NOT LEAKPROOF
 AS $BODY$
-
 BEGIN
 
 IF TG_OP='INSERT' THEN
@@ -38,6 +37,14 @@ SELECT '243500667_PLUI_'||to_char(NEW.datappro,'YYYYMMDD') as idurba, '243500667
 		'http://geo.valdille-aubigne.fr/download/urbanisme/243500667_PLUI_'||to_char(NEW.datappro,'YYYYMMDD') as urlpe,
 		'http://geobretagne.fr/geonetwork/srv/fre/xml_iso19139?uuid=fr-243500667-plui'||to_char(NEW.datappro,'YYYYMMDD') as urlmd
 INTO NEW.idurba, NEW.nomreg, NEW.urlreg, NEW.nomplan, NEW.urlplan, NEW.urlpe, NEW.urlmd ;
+END IF;
+
+IF TG_OP ='UPDATE' AND NEW.etat ='03' AND OLD.etat<>'03' THEN
+/* Changement statut ancien document */
+UPDATE plui.doc_urba
+SET etat = '05', datefin= (NEW.datappro - INTERVAL '1 DAY')
+WHERE etat = '03' ;
+
 END IF;
 
 RETURN NEW;
