@@ -15,3 +15,16 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+
+ALTER TABLE plui.info_lin
+    OWNER to postgres;
+
+GRANT ALL ON TABLE plui.info_lin TO postgres;
+-- Index: info_lin_geom_gist
+
+-- DROP INDEX plui.info_lin_geom_gist;
+
+CREATE INDEX info_lin_geom_gist
+    ON plui.info_lin USING gist
+    (the_geom)
+    TABLESPACE pg_default;
