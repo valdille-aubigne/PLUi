@@ -6,7 +6,6 @@ CREATE TABLE plui.habillage_txt
     taille integer NOT NULL,
     style character(40) COLLATE pg_catalog."default",
     angle integer,
-    idurba character varying(30) COLLATE pg_catalog."default" NOT NULL,
     idkey integer NOT NULL DEFAULT nextval('plui.habillage_txt_idkey_seq'::regclass),
     the_geom geometry(Point,2154),
     couleur character varying(11) COLLATE pg_catalog."default",
