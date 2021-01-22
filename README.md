@@ -7,3 +7,5 @@ L'objectif de la structuration en base est triple :
 
 Tout en conservant une compatibilité totale avec le standard d'échange CNIG
 
+## [Modèle conceptuel de données :](https://dbdiagram.io/d/6007f71180d742080a3719e8)
+![alt text](https://github.com/valdille-aubigne/PLUi/blob/master/MCD_DDU.png.jpg?raw=true)
