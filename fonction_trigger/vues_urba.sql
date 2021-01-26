@@ -2,7 +2,7 @@
 
 -- DROP FUNCTION plui.vues_urba();
 
-CREATE FUNCTION plui.vues_urba()
+CREATE OR REPLACE FUNCTION plui.vues_urba()
     RETURNS trigger
     LANGUAGE 'plpgsql'
     COST 100
@@ -284,7 +284,7 @@ EXECUTE
 		SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout as idkey, the_geom 
 		FROM plui.info_surf_ajouts inf, ino 
 		WHERE ino.id = inf.idkey_ajout)
-
+		
  SELECT inf.idkey,
     du.idurba,
     inf.libelle,
@@ -339,7 +339,7 @@ EXECUTE
 		SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout as idkey, the_geom 
 		FROM plui.info_lin_ajouts inf, ino 
 		WHERE ino.id = inf.idkey_ajout)
-
+		
  SELECT inf.idkey,
     du.idurba,
     inf.libelle,
@@ -394,7 +394,7 @@ EXECUTE
 		SELECT libelle, txt, typeinf, stypeinf, nomfic, urlfic, datvalid, idkey_ajout as idkey, the_geom 
 		FROM plui.info_pct_ajouts inf, ino 
 		WHERE ino.id = inf.idkey_ajout)
-
+		
  SELECT inf.idkey,
     du.idurba,
     inf.libelle,
@@ -449,7 +449,7 @@ EXECUTE
 		SELECT idkey_ajout as idkey, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
 		FROM plui.sup_surf_ajouts sup, supo 
 		WHERE supo.id = sup.idkey_ajout)
-
+		
  SELECT sup.idkey,
     du.idurba,
     sup.libsup,
@@ -501,7 +501,7 @@ EXECUTE
 		SELECT idkey_ajout as idkey, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
 		FROM plui.sup_lin_ajouts sup, supo 
 		WHERE supo.id = sup.idkey_ajout)
-
+		
  SELECT sup.idkey,
     du.idurba,
     sup.libsup,
@@ -553,7 +553,7 @@ EXECUTE
 		SELECT idkey_ajout as idkey, libsup, categorie, infos, regles, datappro, nomfic, urlfic, datvalid, the_geom 
 		FROM plui.sup_pct_ajouts sup, supo 
 		WHERE supo.id = sup.idkey_ajout)
-
+		
  SELECT sup.idkey,
     du.idurba,
     sup.libsup,
@@ -700,11 +700,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''zone_urba_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''zone_urba_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''zone_urba_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''zone_urba_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''zone_urba_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''zone_urba_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''zone_urba_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.prescription_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO prescription_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -712,11 +712,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''prescription_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''prescription_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''prescription_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''prescription_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''prescription_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''prescription_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''prescription_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.prescription_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO prescription_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -724,11 +724,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''prescription_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''prescription_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''prescription_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''prescription_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''prescription_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''prescription_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''prescription_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.prescription_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -736,11 +736,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''prescription_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''prescription_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''prescription_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''prescription_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''prescription_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''prescription_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.info_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO info_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -748,11 +748,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''info_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''info_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''info_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''info_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''info_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''info_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''info_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.info_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -760,11 +760,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''info_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''info_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''info_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''info_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''info_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''info_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.info_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -772,11 +772,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''info_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''info_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''info_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''info_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''info_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''info_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.sup_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO sup_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -784,22 +784,22 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''sup_surf_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''sup_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''sup_surf_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''sup_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''sup_surf_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''sup_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''sup_surf_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.sup_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
 USING NEW, OLD;
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''sup_lin_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''sup_lin_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''sup_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''sup_lin_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''sup_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''sup_lin_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 EXECUTE 'ALTER VIEW IF EXISTS plui.sup_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||' RENAME TO sup_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')
@@ -807,11 +807,11 @@ USING NEW, OLD;
 
 EXECUTE 
 'UPDATE public.layer_styles
- SET f_table_name = ''sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')', 
-	stylename = ''sup_pct_'||NEW.nomproc||'_'||to_char(NEW.datappro,'ddmmyyyy')'
+ SET f_table_name = ''sup_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||''', 
+	stylename = ''sup_pct_'||lower(NEW.nomproc)||'_'||to_char(NEW.datappro,'ddmmyyyy')||'''
  WHERE f_table_catalog=''sig'' AND f_table_schema=''plui'' 
-	AND f_table_name=''sup_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')' 
-	AND stylename=''sup_pct_'||OLD.nomproc||'_'||to_char(OLD.datappro,'ddmmyyyy')''
+	AND f_table_name=''sup_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''' 
+	AND stylename=''sup_pct_'||lower(OLD.nomproc)||'_'||to_char(OLD.datappro,'ddmmyyyy')||''''
 USING NEW, OLD ;
 
 END IF;
