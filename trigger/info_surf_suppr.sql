@@ -3,7 +3,7 @@
 -- DROP TRIGGER info_surf_suppr ON plui.info_surf_suppr;
 
 CREATE TRIGGER info_surf_suppr
-    AFTER INSERT OR DELETE
+    AFTER INSERT OR DELETE OR UPDATE
     ON plui.info_surf_suppr
     FOR EACH ROW
     EXECUTE PROCEDURE plui.info_surf_suppr();
