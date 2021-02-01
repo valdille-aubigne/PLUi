@@ -3,7 +3,7 @@
 -- DROP TRIGGER info_pct_suppr ON plui.info_pct_suppr;
 
 CREATE TRIGGER info_pct_suppr
-    AFTER INSERT OR DELETE
+    AFTER INSERT OR DELETE OR UPDATE
     ON plui.info_pct_suppr
     FOR EACH ROW
     EXECUTE PROCEDURE plui.info_pct_suppr();
