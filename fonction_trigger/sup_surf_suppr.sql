@@ -26,6 +26,19 @@ WHERE idkey = '||OLD.idkey_du
 USING OLD ;
 END IF;
 
+IF TG_OP = 'UPDATE' AND NEW.idkey_du <> OLD.idkey_du THEN
+EXECUTE 
+'UPDATE plui.doc_urba
+SET sup_surf = array_remove(sup_surf,'||NEW.idkey||')
+WHERE idkey = '||NEW.idkey_du
+USING NEW ;
+EXECUTE 
+'UPDATE plui.doc_urba
+SET sup_surf = array_append(sup_surf,'||OLD.idkey||')
+WHERE idkey = '||OLD.idkey_du
+USING OLD ;
+END IF;
+
 RETURN NEW;
 
 END;
